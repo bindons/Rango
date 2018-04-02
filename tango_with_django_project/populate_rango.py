@@ -30,8 +30,8 @@ def populate():
 
     for cat, cat_data in cats.items():
         c = add_cat(cat)
-    for p in cat_data["pages"]:
-        add_page(c, p["title"], p["url"],p["views"])
+        for p in cat_data["pages"]:
+            add_page(c, p["title"], p["url"],p["views"])
     # Print out the categories we have added.
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
