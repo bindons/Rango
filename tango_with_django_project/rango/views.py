@@ -70,6 +70,11 @@ def about(request):
     #print(request.method)
     #print(request.user)
     context_dict = {'your_name':'dongjie','method':request.method,'user':request.user}
+    visits = request.session.get('visits')
+    last_visit = request.session.get('last_visit')
+    last_visit_time = datetime.strptime(last_visit[:-7], '%Y-%m-%d %H:%M:%S')
+    context_dict['visits'] = visits
+    context_dict['last_visit'] = last_visit_time
     return render(request,'rango/about.html',context=context_dict)
 
 
