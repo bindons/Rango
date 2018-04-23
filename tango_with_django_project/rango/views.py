@@ -18,6 +18,7 @@ def get_server_side_cookie(request,cookie,default_val=None):
         val = default_val
     return val
 
+
 '''
 def visitor_cookie_handler(request,response):
     visits_cookie = int(request.COOKIES.get('visits','1'))
@@ -63,15 +64,9 @@ def index(request):
     return response
 
 def about(request):
-    #if request.session.test_cookie_worked():
-    #    print("TEST COOKIE WORKED!")
-    #request.session.delete_test_cookie()
-    #return HttpResponse('Rango says here is the about page!')
-    #print(request.method)
-    #print(request.user)
     context_dict = {'your_name':'dongjie','method':request.method,'user':request.user}
-    visits = request.session.get('visits')
-    last_visit = request.session.get('last_visit')
+    visits = get_server_side_cookie(request,'visits','1')
+    last_visit = get_server_side_cookie(request,'last_visit',str(datetime.now()))
     last_visit_time = datetime.strptime(last_visit[:-7], '%Y-%m-%d %H:%M:%S')
     context_dict['visits'] = visits
     context_dict['last_visit'] = last_visit_time

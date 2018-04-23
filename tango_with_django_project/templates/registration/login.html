@@ -1,16 +1,28 @@
 {% extends "rango/base_bootstrap.html" %}
-
+{% load staticfiles %}
 {% block title_block %}
     Login
 {% endblock %}
 
 {% block body_block %}
-    <h1>Login</h1>
-    <form method="post" action=".">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Log in"/>
-            <input type="hidden" name="next" value="{{ next }}"/>
+    <link href="{% static 'js/floating-labels.css' %}" rel="stylesheet">
+    <form class="form-signin" role="form" method="post" action=".">
+        {% csrf_token %}
+        <div class="text-center mb-4">
+            <br/>
+            <img class="mb-4" src="{% static 'images/favicon.ico' %}" alt="Picture of Rango" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Rango</h1>
+        </div>
+        <div class="form-label-group">
+            <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+            <label for="inputUsername">Username</label>
+        </div>
+        <div class="form-label-group">
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <label for="inputPassword">Password</label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Sbumit">Sign in</button>
+        <input type="hidden" name="next" value="{{ next }}"/>
     </form>
     <p>
         Not a member?

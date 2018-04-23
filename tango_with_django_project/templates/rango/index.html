@@ -6,36 +6,56 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>Rango says ...</h1>
-    <div>
-        hey there partner!
-    </div>
-    <h2>Most Liked Categories</h2>
-    <div>
-        {% if categories %}
-            <ul>
-                {% for category in categories %}
-                    <li><a href="{% url 'rango:show_category' category.slug %}">{{ category.name }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}}
-            <h2>There are no categories present.</h2>
-        {% endif %}
-    </div>
-    <div>
-        <h2>Most Viewed Pages</h2>
-        <div>
-            {% if pages %}
-                <ul>
-                    {% for page in pages %}
-                        <li><a href="{{ page.url }}">{{ page.title }}</a> </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <h2>There are no pages present.</h2>
-            {% endif %}
+    <main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Rango says ...</h1>
+                {% if user.is_authenticated %}
+                    <p class="lead">hey there {{ user.username }}! </p>
+                {% else %}
+                    <p class="lead">hey there partner! </p>
+                {% endif %}
+                <p><a class="btn btn-primary btn-lg" href="{% url 'rango:about' %}" role="button">Learn more &raquo;</a></p>
+            </div>
         </div>
-    </div>
+
+        <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Most Liked Categories</h2>
+                    <p>
+                        {% if categories %}
+                            <ul class="list-group">
+                                {% for category in categories %}
+                                    <li class="list-group-item"><a href="{% url 'rango:show_category' category.slug %}">{{ category.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}}
+                            <h2>There are no categories present.</h2>
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <h2>Most Viewed Pages</h2>
+                    <p>
+                        {% if pages %}
+                            <ul class="list-group">
+                                {% for page in pages %}
+                                    <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a> </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <h2>There are no pages present.</h2>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <hr>
+        </div> <!-- /container -->
+    </main>
     <div>
         <img src="{% static 'images/rango.jpg' %}" alt="Picture of rango" />
     </div>
