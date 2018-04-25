@@ -7,25 +7,27 @@
 {% block body_block %}
     <link href="{% static 'js/floating-labels.css' %}" rel="stylesheet">
     <form class="form-signin" role="form" method="post" action=".">
-        {% csrf_token %}
+
         <div class="text-center mb-4">
             <br/>
             <img class="mb-4" src="{% static 'images/favicon.ico' %}" alt="Picture of Rango" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Rango</h1>
         </div>
+         {% csrf_token %}
         <div class="form-label-group">
-            <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
-            <label for="inputUsername">Username</label>
+            <input type="text" id="id_username" class="form-control" placeholder="Username" name="username" required autofocus>
+            <label for="id_username">Username</label>
         </div>
         <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <label for="inputPassword">Password</label>
+            <input type="password" id="id_password" class="form-control" placeholder="Password"  name="password" required>
+            <label for="id_password">Password</label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Sbumit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
         <input type="hidden" name="next" value="{{ next }}"/>
-    </form>
-    <p>
+        <p>
         Not a member?
         <a href="{% url 'registration_register' %}">Register</a>
-    </p>
+        </p>
+    </form>
+
 {% endblock %}
